@@ -49,12 +49,13 @@ To run the test executables
 The project relies on git, g++, GNU Make, Google test and Verilator.
 
 ### Verilator
-You can install Verilator using your favourite packet system or compile it from source
+You can install Verilator (https://www.veripool.org/wiki/verilator) using your
+favourite packet manager, for example
 
     > brew install verilator  (mac)
     > apt-get install verilator (ubuntu)
 
-https://www.veripool.org/wiki/verilator
+ .. or you can build it from source (https://github.com/verilator/verilator).
 
 ### First build
 On the first build you need to compile googletest. But after that you don't
