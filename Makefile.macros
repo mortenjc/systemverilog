@@ -1,0 +1,26 @@
+# Copyright (C) 2021 Morten Jagd Christensen, LICENSE: BSD2
+#
+
+# The main targets are the test executables: bin/xxxTest
+define make_bintargets
+bin/$(1)Test: build/$(1)/$(1).mk
+endef
+
+# Parametrise the dependencies
+# $(1) verilog module name
+# $(2) get .sv from module/ or unit/
+# $(3) additional .sv sources (for units)
+# Example: passing {ddiff, units, src/common/dep.sv} results in
+# build/ddiff/ddiff.mk: src/units/ddiff.sv src/common/dep.sv test/ddiff.cpp
+#
+define make_mktargets
+build/$(1)/$(1).mk: src/$(2)/$(1).sv $(3) test/$(1)_test.cpp
+	@verilator -Wall -cc src/$(2)/$(1).sv $(3) -y . \
+							-Mdir build/$(1) --prefix $(1) \
+	            --exe ../test/$(1)_test.cpp \
+							-o $(1)Test \
+	            -LDFLAGS "-L../../googletest/build/lib -lgtest -lpthread" \
+	            -CFLAGS "-std=c++11" \
+	            -CFLAGS "-I../../googletest/googletest/include/"
+	@make -C build/$(1) -j 8 -f $(1).mk && cp build/$(1)/$(1)Test bin
+endef
