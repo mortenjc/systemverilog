@@ -2,7 +2,7 @@
 //===----------------------------------------------------------------------===//
 ///
 /// \file
-/// \brief test harness for ALU logic
+/// \brief unit test for clockdiv.sv
 //===----------------------------------------------------------------------===//
 
 #include <clockdiv.h>
@@ -35,21 +35,21 @@ clockdiv * clock_i;
   }
 };
 
-
-TEST_F(ClockDivTest, PulsesInASecond) {
-  uint32_t ctr_slow{0};
-  uint32_t ctr_fast{0};
-  ASSERT_EQ(clock_i->clk_slow, 0);
-  ASSERT_EQ(clock_i->clk_fast, 0);
-  for (int i = 0; i < 50000000; i++) {
+//
+TEST_F(ClockDivTest, Divide50MClocks) {
+  const uint32_t Clocks50M = 50'000'000;
+  uint32_t ctr_clk_high{0};
+  uint32_t ctr_clk_low{0};
+  ASSERT_EQ(clock_i->clk_out, 0);
+  for (int i = 0; i < Clocks50M; i++) {
     clock_ticks(1);
-    if (clock_i->clk_slow)
-      ctr_slow++;
-    if (clock_i->clk_fast)
-      ctr_fast++;
+    if (clock_i->clk_out)
+      ctr_clk_high++;
+    else
+      ctr_clk_low++;
   }
-  ASSERT_EQ(ctr_fast, 5'000'000);
-  ASSERT_EQ(ctr_slow, 100);
+  ASSERT_EQ(ctr_clk_high, Clocks50M/2);
+  ASSERT_EQ(ctr_clk_low, Clocks50M/2);
 }
 
 int main(int argc, char **argv) {

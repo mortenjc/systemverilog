@@ -3,10 +3,10 @@
 
 include Makefile.macros
 
-MODULES = clockdiv
+MODULES = clockdiv counter
 
-UNITS =
-UNITS.stage1 =
+UNITS = div10counter
+UNITS.div10counter = src/modules/clockdiv.sv src/modules/counter.sv
 
 TARGETS = $(addsuffix Test, $(addprefix bin/, $(MODULES))) $(addsuffix Test, $(addprefix bin/, $(UNITS)))
 
