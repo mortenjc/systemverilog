@@ -8,8 +8,10 @@ on MacOS but should run fine on Linux.
 
 ## The div10counter example
 The project consists of two systemverilog modules (clockdiv.sv, counter.sv)
-and, in my terminology, a unit (div10counter) which connects the two modules
+and, in my terminology, a unit (div10counter.sv) which connects the two modules
 to show how the testing methodology can be extended in a hierarchical manner.
+
+![Hierarchical system](doc/figure1.png)
 
 ### Makefile rules
 The toplevel makefile uses macros to generate the dependencies so it is
@@ -23,7 +25,7 @@ other modules. To add a module just append it to the MODULE list. For example
 The requirement is that you have a corresponding test file in the
 test/ directory.
 
-A (makefile) unit is a (system)verilog module that instantiates one or more 
+A (makefile) unit is a (system)verilog module that instantiates one or more
 (system)verilog modules. Here you both need to speficy the module AND its
 dependencies:
 
