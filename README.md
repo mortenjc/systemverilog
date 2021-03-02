@@ -45,8 +45,23 @@ To run the test executables
 
     > make runtest
 
+The output will look something like This
+
+![Google test](doc/figure2.png)
+
+
+## Test coverage
+
+    > make genhtml
+    > 'open' logs/html/index.html
+
+The coverage report is a html page where you can 'drill down' into your
+modules.
+![Coverage](doc/figure3.png)
+
 ## Prerequisites
-The project relies on git, g++, GNU Make, Google test and Verilator.
+The project relies on git, g++, GNU Make, Google test and Verilator. If you
+want testoverage you also need lcov.
 
 ### Verilator
 You can install Verilator (https://www.veripool.org/wiki/verilator) using your
