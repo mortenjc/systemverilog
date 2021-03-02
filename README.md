@@ -57,7 +57,12 @@ The output will look something like This
 
 The coverage report is a html page where you can 'drill down' into your
 modules.
-![Coverage](doc/figure3.png)
+![OverallCoverage](doc/figure3.png)
+
+In this trivial example there is not much to see, but for more complicated
+modules this should be a clear help to see if corner cases are missing.
+
+![Line Coverage](doc/figure4.png)
 
 ## Prerequisites
 The project relies on git, g++, GNU Make, Google test and Verilator. If you
