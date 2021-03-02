@@ -14,7 +14,7 @@ module div10counter(
   // derive counter_clk
   bit counter_clk;
   clockdiv clockdiv_i(
-		.clk_in(clk),
+		.clk(clk),
 		.clk_out(counter_clk)
     );
 

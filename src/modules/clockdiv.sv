@@ -6,7 +6,7 @@
 //===----------------------------------------------------------------------===//
 
 module clockdiv(
-	input bit clk_in,
+	input bit clk,
 	output bit clk_out
 	);
 
@@ -15,7 +15,7 @@ module clockdiv(
 
   bit [3:0] counter;
 
-  always_ff @(posedge clk_in) begin
+  always_ff @(posedge clk) begin
 		if (counter >= MAX_COUNT) begin
 		  counter <= 0;
 		end else begin

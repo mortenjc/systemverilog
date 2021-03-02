@@ -29,6 +29,13 @@ $(foreach unit, $(UNITS), $(eval $(call make_mktargets,$(unit),units,$(UNITS.$(u
 runtest: all $(TARGETS)
 	for test in $(TARGETS); do ./$$test || exit 1; done
 
+coverage: runtest
+	verilator_coverage --annotate logs/annotated  --write-info logs/coverage.info\
+	    --annotate-min 1 logs/coverage.dat
+
+genhtml: coverage
+	genhtml logs/coverage.info --output-directory logs/html
+
 gtest:
 	@./scripts/makegtest
 
@@ -43,7 +50,7 @@ build:
 
 # Misc clean targets
 clean:
-	@rm -fr build *.bak bin
+	@rm -fr build *.bak bin logs
 
 realclean: clean
 	@rm -fr googletest db output_files simulation

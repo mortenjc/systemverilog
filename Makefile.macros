@@ -15,7 +15,7 @@ endef
 #
 define make_mktargets
 build/$(1)/$(1).mk: src/$(2)/$(1).sv $(3) test/$(1)_test.cpp
-	@verilator -Wall -cc src/$(2)/$(1).sv $(3) -y . \
+	@verilator -Wall --coverage -cc src/$(2)/$(1).sv $(3) -y . \
 							-Mdir build/$(1) --prefix $(1) \
 	            --exe ../test/$(1)_test.cpp \
 							-o $(1)Test \

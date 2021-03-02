@@ -17,9 +17,9 @@ clockdiv * clock_i;
 
   void clock_ticks(int N) {
     for (int i = 1; i <= N; i++) {
-      clock_i->clk_in = 1;
+      clock_i->clk = 1;
       clock_i->eval();
-      clock_i->clk_in = 0;
+      clock_i->clk = 0;
       clock_i->eval();
     }
   }
@@ -55,5 +55,8 @@ TEST_F(ClockDivTest, Divide50MClocks) {
 int main(int argc, char **argv) {
   Verilated::commandArgs(argc, argv);
   testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+  auto res = RUN_ALL_TESTS();
+  Verilated::mkdir("logs");
+  VerilatedCov::write("logs/coverage.dat");
+  return res;
 }
