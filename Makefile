@@ -3,6 +3,9 @@
 
 include Makefile.macros
 
+
+VLCOVFLAGS = --annotate logs/annotate --annotate-all --annotate-min 1
+
 # User only needs to edit below
 MODULES = clockdiv counter
 UNITS = div10counter
@@ -14,7 +17,6 @@ TARGETS = $(addsuffix Test, $(addprefix bin/, $(MODULES))) $(addsuffix Test, $(a
 vpath %.sv src/modules src/units
 
 all: directories $(TARGETS)
-	@echo "done"
 
 # Create dependencies using macros
 # main targets
@@ -27,14 +29,13 @@ $(foreach unit, $(UNITS), $(eval $(call make_mktargets,$(unit),units,$(UNITS.$(u
 
 #
 runtest: all $(TARGETS)
-	for test in $(TARGETS); do ./$$test || exit 1; done
+	@for test in $(TARGETS); do ./$$test || exit 1; done
 
 coverage: runtest
-	verilator_coverage --annotate logs/annotated  --write-info logs/coverage.info\
-	    --annotate-min 1 logs/coverage.dat
+	verilator_coverage $(VLCOVFLAGS) -write-info logs/merged.info logs/coverage1.dat logs/coverage2.dat
 
 genhtml: coverage
-	genhtml logs/coverage.info --output-directory logs/html
+	genhtml logs/merged.info --output-directory logs/html
 
 gtest:
 	@./scripts/makegtest
@@ -42,11 +43,11 @@ gtest:
 # make sure build directory is created
 .PHONY: directories
 #
-directories: build bin
+directories: build
 
 build:
-	@mkdir -p build
-	@mkdir -p bin
+	@mkdir -p build bin
+
 
 # Misc clean targets
 clean:
