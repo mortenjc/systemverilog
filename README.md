@@ -3,13 +3,13 @@ Demonstrating a toolchain combining SystemVerilog, Verilator, GoogleTest
 and test coverage for verification
 
 This repo contains a complete example of how to use Verilator and GoogleTest
-to validate Systemverilog code. It also demonstrates code coverage for
+to validate SystemVerilog code. It also demonstrates code coverage for
 SystemVerilog modules. It has currently only been tested on MacOS but should
 run fine on Linux.
 
 
 ## The div10counter example
-The project consists of two Systemverilog modules (clockdiv.sv, counter.sv)
+The project consists of two SystemVerilog modules (clockdiv.sv, counter.sv)
 and - my own terminology - a unit (div10counter.sv) which connects the two modules
 to show how the testing methodology can be extended in a hierarchical manner.
 
@@ -61,7 +61,7 @@ To run the test executables
 
 The output will look something like this
 
-![Google test](doc/figure2.png)
+![GoogleTest](doc/figure2.png)
 
 
 ## Test coverage
@@ -73,11 +73,11 @@ SystemVerilog module where 'covered' during the test runs.
 
 In the coverage report (logs/html/index.html) you get an overview of all the modules
 and their line coverage.
-![OverallCoverage](doc/figure3.png)
+![CoverageTop](doc/figure3.png)
 
 You can also look closer at individual modules with an annotated view.
 
-![Line Coverage](doc/figure4.png)
+![CoverageModule](doc/figure4.png)
 
 In this trivial example there is not much to see, but for more complicated
 modules this should be a clear help to see if corner cases are missing.
